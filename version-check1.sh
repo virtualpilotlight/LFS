@@ -1,11 +1,8 @@
 #!/bin/bash
-# Simple script to list version numbers of critical development tools
+# installs the dependancies for LFS
+apt-get update && apt-get upgrade
+
 export LC_ALL=C
-bash --version | head -n1 | cut -d" " -f2-4
-MYSH=$(readlink -f /bin/sh)
-echo "/bin/sh -> $MYSH"
-echo $MYSH | grep -q bash || echo "ERROR: /bin/sh does not point to bash"
-unset MYSH
 
 apt-get install binutils
 apt-get install bison
@@ -26,6 +23,12 @@ apt-get install sed
 apt-get install tar
 apt-get install makeinfo
 apt-get install xz
+
+bash --version | head -n1 | cut -d" " -f2-4
+MYSH=$(readlink -f /bin/sh)
+echo "/bin/sh -> $MYSH"
+echo $MYSH | grep -q bash || echo "ERROR: /bin/sh does not point to bash"
+unset MYSH
 
 if [ -h /usr/bin/yacc ]; then
   echo "/usr/bin/yacc -> `readlink -f /usr/bin/yacc`";
